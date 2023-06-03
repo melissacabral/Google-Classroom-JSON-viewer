@@ -1,0 +1,38 @@
+/*
+Copyright 2023 Melissa Cabral
+
+Google Classroom JSON Viewer
+*/
+
+.post{
+    border: solid 1px #eee;
+    padding: 1em ;
+    margin:  1em 0 2em;
+}
+.post-info{
+    font-size: 85%;
+    border-top:  solid 1px #ccc;
+    padding: .2em 0;
+    margin: 1em 0 0;
+}
+input[type=button]{
+    margin: 1em 0 0;
+}
+.submissions{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1em;
+}
+.submissions .submissions-heading{
+    flex-grow: 1;
+    flex-basis: 100%;
+   
+}
+.submission{
+    box-sizing: border-box;
+    border: solid 1px #eee;
+    width: 32%;
+    padding: 1em;
+    min-width: 300px;
+}
