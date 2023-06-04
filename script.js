@@ -44,11 +44,9 @@ document.getElementById("import-upload").addEventListener("click", () => {
 
             if (selectedFilter != 'all') {
                 
-                document.querySelector('#topics-list .all').classList.remove("disabled");
                 itemsToHide = document.querySelectorAll( `#posts-container .post:not(.${selectedFilter})` );
                 itemsToShow = document.querySelectorAll( `#posts-container .post.${selectedFilter}` );
             }else{
-                document.querySelector('#topics-list .all').classList.add("disabled");
             }
 
             itemsToHide.forEach((item) => {
@@ -156,7 +154,7 @@ parseElems[1] = (obj) => {
             type: "li",
             parent:"topics-list",
             content:"View All Posts",
-            className: "topic all disabled",
+            className: "topic all",
             attrs: {
                     "data-filter": "all"
             }

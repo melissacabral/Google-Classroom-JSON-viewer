@@ -82,10 +82,19 @@ input[type=button]{
     color: var(--class-color);
 }
 .current{
+    position: relative;
+}
+.current:before{
+    content: '';
+    display: block;
+    width: 1em;
+    position: absolute;
+    top: .2em;
+    left: -1.2em;
+    height: 1em;
+    border-radius: 100%;
     background-color: var(--class-color);
-    color: var(--title-text-color);
-    display: inline-block;
-    padding: .1em .3em;
+   
 }
 .hide{
     display: none;
