@@ -1,8 +1,11 @@
 /*
 Copyright 2023 Melissa Cabral
-
 Google Classroom JSON Viewer
 */
+:root{
+    --class-color: #2761E6;
+    --title-text-color:  white;
+}
 
 .post{
     border: solid 1px #eee;
@@ -32,7 +35,77 @@ input[type=button]{
 .submission{
     box-sizing: border-box;
     border: solid 1px #eee;
-    width: 32%;
+    width: 49%;
     padding: 1em;
     min-width: 300px;
+}
+#view{
+    max-width: 1600px;
+    width: 95%;
+    margin: auto;
+    display: grid;
+    gap: 1em;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "header header "
+    "sidebar main";
+}
+#title-container{
+    grid-area: header;
+    background-color: var(--class-color);
+    color: var(--title-text-color);
+    padding: 2em 2em .5em;
+    margin: 0 0 2em;
+    border-radius: 1em;
+}
+#topics-container{
+    grid-area:  sidebar;
+}
+#posts-container{
+    grid-area: main;
+}
+
+#topics-list{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.topic{
+    cursor: pointer;
+}
+.disabled{
+    cursor: not-allowed;
+    color: #ccc;
+}
+.button{
+    color: var(--class-color);
+}
+.current{
+    background-color: var(--class-color);
+    color: var(--title-text-color);
+    display: inline-block;
+    padding: .1em .3em;
+}
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}
+
+/*milligram recolor*/
+.button, button, input[type='button'], input[type='reset'], input[type='submit']{
+    background-color: var(--class-color);
+    color: var(--title-text-color);
+    border-color: var(--class-color);
+}
+.button.button-outline, button.button-outline, input[type='button'].button-outline, input[type='reset'].button-outline, input[type='submit'].button-outline{
+    color: var(--class-color);
+}
+a{
+    border-bottom: dotted 1px var(--class-color);
+    color: black;
+   
+  
 }
