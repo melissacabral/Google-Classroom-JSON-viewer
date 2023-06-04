@@ -61,13 +61,6 @@ document.getElementById("import-upload").addEventListener("click", () => {
     });
 });
 
-document.getElementById("license-info-toggle").addEventListener("click", () => ((_this) => {
-    toggleElem("license-info")();
-    if (_this.value == "Show license information")
-        _this.value = "Hide license information";
-    else _this.value = "Show license information";
-})(document.getElementById("license-info-toggle")));
-
 
 /**
  * Set up all the HTML structure for the viewer
