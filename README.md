@@ -8,6 +8,12 @@ MIT License
 
 Copyright (c) 2023 Melissa Cabral
 
+How to Use
+----
+1. Launch index.html in a modern browser
+1. Follow the prompt on the screen
+
+
 Credits
 ----
 * Classroom Export Viewer by psvenk 2019
