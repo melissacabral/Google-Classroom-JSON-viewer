@@ -16,7 +16,7 @@ How to Use
 
 Credits
 ----
-* Classroom Export Viewer by psvenk 2019
+* Classroom Export Viewer by psvenk 2019 https://github.com/psvenk/classroom-export-viewer
 * Milligram CSS: http://milligram.io
 
  
