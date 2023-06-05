@@ -263,6 +263,7 @@ parseElems[1] = (obj) => {
                             className: "material-form",
                             attrs: {
                                 "href": material.form.formUrl,
+                                "target" : "_blank"
                             },
                         });
                     }
@@ -275,6 +276,8 @@ parseElems[1] = (obj) => {
                             className: "material-drive-file",
                             attrs: {
                                 "href": material.driveFile.driveFile.alternateLink,
+                                "target" : "_blank"
+
                             },
                         });
 
@@ -319,6 +322,8 @@ parseElems[1] = (obj) => {
                 className: "material-link",
                 attrs: {
                     "href": material.link.url,
+                    "target" : "_blank"
+
                 },
             },
             {
@@ -437,6 +442,8 @@ parseElems[1] = (obj) => {
                             className: "submission-drive-file",
                             attrs: {
                                 "href": attachment.driveFile.alternateLink,
+                                "target" : "_blank"
+                                
                             },
                         });
 
