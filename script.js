@@ -13,7 +13,6 @@ document.getElementById("import-upload").addEventListener("click", () => {
     const file = document.getElementById("import-filepicker").files[0];
     const reader = new FileReader();
     reader.readAsText(file);
-    console.log(file)
     reader.addEventListener("load", () => {
         // Parse JSON file and store it in a JS object
         const obj = JSON.parse(reader.result);
@@ -116,14 +115,18 @@ parseElems[1] = (obj) => {
                 content: `Original name: ${obj.descriptionHeading}`,
                 parent: "title-container"
             });
-                if (obj.description) childElems.push({
-                    id: "description",
-                    type: "p",
-                    parent: "description-container",
-                    content: `${obj.description}`,
-                    parent: "title-container"
+            if (obj.description){
+                let description = obj.description
+                childElems.push({
+                id: "description",
+                type: "p",
+                parent: "description-container",
+                content: description.autoLink({ target: "_blank" })
+,
+                parent: "title-container"
 
-                });
+            });
+            } 
     //list all Topics
     if (obj.topics) {
         childElems.push({
@@ -226,11 +229,12 @@ parseElems[1] = (obj) => {
             } else{
                 description += "No Description"
             }
+            description = addBreaks(description)
             childElems.push({
                 id: `post-${post_id}-desc`,
                 type: "p",
                 parent: `post-${post_id}`,
-                content: description,
+                content: description.autoLink({ target: "_blank" }),
                 className: "post-desc",
             });
 
@@ -443,7 +447,7 @@ parseElems[1] = (obj) => {
                             attrs: {
                                 "href": attachment.driveFile.alternateLink,
                                 "target" : "_blank"
-                                
+
                             },
                         });
 
@@ -481,7 +485,9 @@ parseElems[1] = (obj) => {
     return childElems;
 };
 
-// Returns a function to toggle the element with the given ID
+/**
+ * Toggle visibility of any element with an ID
+ */
 const toggleElem = (id) => () => {
     const elem = document.getElementById(id);
     if (elem.style.display == "none") elem.style.display = "";
@@ -524,15 +530,17 @@ const stringToColor = function(str) {
  * @return {string}        'black' or 'white'
  */
 function contrastColor(hexcolor){
-  
   var r = parseInt(hexcolor.substr(0,2),16);
   var g = parseInt(hexcolor.substr(2,2),16);
   var b = parseInt(hexcolor.substr(4,2),16);
   var yiq = ((r*299)+(g*587)+(b*114))/1000;
-  console.log(yiq);
   return (yiq >= 128) ? 'black' : 'white';
 }
-
+/**
+ * Convert break characters to <br>
+ */
+const addBreaks = (str) => str.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    
 
 // Create HTML elements according to data from getChildElems and add them to
 // the area where class data will be displayed (the view)
@@ -559,7 +567,7 @@ const createElems = (childElems, view) => {
         elemObj.id = elem.id;
 
         // Set the text content of the element
-        elemObj.innerText = elem.content || "";
+        elemObj.innerHTML = elem.content || "";
 
         // Set any initial style overrides
         for (const key in elem.style) {
@@ -587,3 +595,43 @@ const createElems = (childElems, view) => {
 
     return elements;
 };
+/**
+ * Autolink function
+ * @see https://github.com/bryanwoods/autolink-js
+ * @return {[type]} [description]
+ */
+(function() {
+  var autoLink,
+    slice = [].slice;
+
+  autoLink = function() {
+    var callback, k, linkAttributes, option, options, pattern, v;
+    options = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+    pattern = /(^|[\s\n]|<[A-Za-z]*\/?>)((?:https?|ftp):\/\/[\-A-Z0-9+\u0026\u2019@#\/%?=()~_|!:,.;]*[\-A-Z0-9+\u0026@#\/%=~()_|])/gi;
+    if (!(options.length > 0)) {
+      return this.replace(pattern, "$1<a href='$2'>$2</a>");
+    }
+    option = options[0];
+    callback = option["callback"];
+    linkAttributes = ((function() {
+      var results;
+      results = [];
+      for (k in option) {
+        v = option[k];
+        if (k !== 'callback') {
+          results.push(" " + k + "='" + v + "'");
+        }
+      }
+      return results;
+    })()).join('');
+    return this.replace(pattern, function(match, space, url) {
+      var link;
+      link = (typeof callback === "function" ? callback(url) : void 0) || ("<a href='" + url + "'" + linkAttributes + ">" + url + "</a>");
+      return "" + space + link;
+    });
+  };
+
+  String.prototype['autoLink'] = autoLink;
+
+}).call(this);
+
