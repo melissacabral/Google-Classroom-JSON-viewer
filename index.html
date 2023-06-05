@@ -19,65 +19,67 @@ SPDX-License-Identifier: MIT
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-  <div class="container start-here">
+  <div class="start-here">
+    <div class="container">
+      <h1>Google Classroom JSON Viewer</h1>
+      <div class="input">
+        <input type="file" id="import-filepicker" value="data.json" />
+        <input type="button" id="import-upload" value="View File" /></div>
+      </div>
+    </div>
+    
+    <div id="view"></div>  
 
-    <h1>Google Classroom JSON Viewer</h1>
-    <label for="import-filepicker">Load your <code>class-data.json</code> file exported from Google Classroom</label>
-    <input type="file" id="import-filepicker" value="data.json" />
-    <input type="button" id="import-upload" value="View File" />
-  </div>
-  <hr>
-  <div id="view"></div>  
-
- 
-  <div class="container">
+    
+    <div class="container">
 
 
-    <div id="about" >
-      <h3>  &copy; 2023 Melissa Cabral</h3>
-      <p>
+      <div id="about" >
+        <h3>  &copy; 2023 Melissa Cabral</h3>
+        <p>
          <strong>Did this project help you out?  </strong>
-      <br>
-      <a class="button button-outline" href="https://paypal.me/MelissaCSD?country.x=US&locale.x=en_US" target="_blank">Buy me a coffee</a>
-      </p>
+         <br>
+         <a class="button button-outline" href="https://paypal.me/MelissaCSD?country.x=US&locale.x=en_US" target="_blank">Buy me a coffee</a>
+       </p>
 
-      <h3>Privacy</h3>
-      <p>This website collects and stores ZERO data from you!</p>
-      <h3>License</h3>
-      <p>
+       <h3>Privacy</h3>
+       <p>This website collects and stores ZERO data from you!</p>
+       <h3>License</h3>
+       <p>
         Google Classroom JSON Viewer is free/libre and open-source software;
         <br>
         the source code can be found on 
         <a href="https://github.com/melissacabral/Google-Classroom-JSON-viewer">GitHub</a>.
         Below is the MIT License, under which this software is licensed:
       </p>
-      <p id="license"><blockquote>
-        <b>MIT License</b>
-        <br>
-
-        Copyright &copy; 2023 Melissa Cabral
-        <br>
-        <br>
-        Permission is hereby granted, free of charge, to any person obtaining a copy
-        of this software and associated documentation files (the "Software"), to deal
-        in the Software without restriction, including without limitation the rights
-        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-        copies of the Software, and to permit persons to whom the Software is
-        furnished to do so, subject to the following conditions:
-        <br>
-        <br>
-        The above copyright notice and this permission notice shall be included in all
-        copies or substantial portions of the Software.
-        <br>
-        <br>
-        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-        SOFTWARE.
-      </blockquote></p>
+      <p id="license">
+        <blockquote>
+          <b>MIT License</b>
+          <br>
+          Copyright &copy; 2023 Melissa Cabral
+          <br>
+          <br>
+          Permission is hereby granted, free of charge, to any person obtaining a copy
+          of this software and associated documentation files (the "Software"), to deal
+          in the Software without restriction, including without limitation the rights
+          to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+          copies of the Software, and to permit persons to whom the Software is
+          furnished to do so, subject to the following conditions:
+          <br>
+          <br>
+          The above copyright notice and this permission notice shall be included in all
+          copies or substantial portions of the Software.
+          <br>
+          <br>
+          THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+          IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+          FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+          AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+          LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+          OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+          SOFTWARE.
+        </blockquote>
+      </p>
     </div>
   </div>
   <script type="text/javascript" src="script.js"></script>

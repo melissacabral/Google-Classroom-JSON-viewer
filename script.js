@@ -20,43 +20,14 @@ document.getElementById("import-upload").addEventListener("click", () => {
         // Populate the view
         createElems(getChildElems(obj), document.getElementById("view"));
 
-
-        /**
-         * Filter by Topic
-         */
-         const filterButtons = document.querySelectorAll("#topics-list .topic");
-         filterButtons.forEach((filter) => {
-          filter.addEventListener("click", filterIt);
+        document.body.classList.add('loaded')
+        
+        const filterButtons = document.querySelectorAll("#topics-list .topic");
+        filterButtons.forEach((filter) => {
+            filter.addEventListener("click", filterIt);
         });
 
-         function filterIt(e) {
-            //get all .current and remove
-            let current = document.querySelectorAll( `.current` );
-            current.forEach((el) => {el.classList.remove('current')});
-            //add .current to this element
-        
-            e.target.classList.add('current');
-            let selectedFilter = e.target.dataset.filter;
-            let itemsToShow = document.querySelectorAll( `#posts-container .post` );
-            let itemsToHide = [];
-           
 
-            if (selectedFilter != 'all') {
-                
-                itemsToHide = document.querySelectorAll( `#posts-container .post:not(.${selectedFilter})` );
-                itemsToShow = document.querySelectorAll( `#posts-container .post.${selectedFilter}` );
-            }else{
-            }
-
-            itemsToHide.forEach((item) => {
-                item.classList.add("hide");
-                item.classList.remove("show");
-            });
-            itemsToShow.forEach((item) => {
-                item.classList.add("show");
-                item.classList.remove("hide");
-            });
-        }
     });
 });
 
@@ -82,8 +53,8 @@ document.getElementById("import-upload").addEventListener("click", () => {
 const parseElems = [];
 parseElems[1] = (obj) => {
     const childElems = [];
-     let background =  "#" +stringToColor(obj.name)
-     let textColor = contrastColor(stringToColor(obj.name))
+    let background =  "#" +stringToColor(obj.name)
+    let textColor = contrastColor(stringToColor(obj.name))
     document.documentElement.style.setProperty('--class-color', background);
     document.documentElement.style.setProperty('--title-text-color', textColor);
     childElems.push({
@@ -115,18 +86,18 @@ parseElems[1] = (obj) => {
                 content: `Original name: ${obj.descriptionHeading}`,
                 parent: "title-container"
             });
-            if (obj.description){
-                let description = obj.description
-                childElems.push({
-                id: "description",
-                type: "p",
-                parent: "description-container",
-                content: description.autoLink({ target: "_blank" })
-,
-                parent: "title-container"
+                if (obj.description){
+                    let description = obj.description
+                    childElems.push({
+                        id: "description",
+                        type: "p",
+                        parent: "description-container",
+                        content: description.autoLink({ target: "_blank" })
+                        ,
+                        parent: "title-container"
 
-            });
-            } 
+                    });
+                } 
     //list all Topics
     if (obj.topics) {
         childElems.push({
@@ -145,14 +116,14 @@ parseElems[1] = (obj) => {
             type: "ul",
             parent:"topics-container"
         });
-         childElems.push({
+        childElems.push({
             id: "topic-all",
             type: "li",
             parent:"topics-list",
             content:"View All Posts",
             className: "topic all",
             attrs: {
-                    "data-filter": "all"
+                "data-filter": "all"
             }
         });
         for (const topic_id in obj.topics){
@@ -175,7 +146,7 @@ parseElems[1] = (obj) => {
         id: "posts-container",
         type: "div"      
     });
-    for (const post_id in obj.posts) {
+        for (const post_id in obj.posts) {
         // Use index of each post in posts array to give unique IDs
         const post = obj.posts[post_id];
         let topic = post.topics?.[0].name || 'No Topic';
@@ -427,7 +398,7 @@ parseElems[1] = (obj) => {
                         content: 
                         (submissionsLength > 1 && submission.student?.profile ?
                             (`${submission.student.profile.name?.fullName}`
-                             || `<${submission.student.profile.emailAddress}>`) :
+                               || `<${submission.student.profile.emailAddress}>`) :
                             ""),
                         parent: `post-${post_id}-submission-${submission_id}`,
                         className: "submission-heading",
@@ -488,7 +459,7 @@ parseElems[1] = (obj) => {
 /**
  * Toggle visibility of any element with an ID
  */
-const toggleElem = (id) => () => {
+ const toggleElem = (id) => () => {
     const elem = document.getElementById(id);
     if (elem.style.display == "none") elem.style.display = "";
     else elem.style.display = "none";
@@ -498,13 +469,13 @@ const toggleElem = (id) => () => {
  * @param  {str} str the string with captial letters and spaces like "Classroom Materials"
  * @return {str}     a slug like "classroom-materials"
  */
-const slugify = function(str) {
+ const slugify = function(str) {
   return str
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/[\s_-]+/g, '-')
-    .replace(/^-+|-+$/g, '');
+  .toLowerCase()
+  .trim()
+  .replace(/[^\w\s-]/g, '')
+  .replace(/[\s_-]+/g, '-')
+  .replace(/^-+|-+$/g, '');
 }
 
 /**
@@ -512,17 +483,17 @@ const slugify = function(str) {
  * @param  {str} str any string
  * @return {str}     6-digit color code
  */
-const stringToColor = function(str) {
+ const stringToColor = function(str) {
   var hash = 0;
   for (var i = 0; i < str.length; i++) {
     hash = str.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  let color = ''
-  for (var i = 0; i < 3; i++) {
+}
+let color = ''
+for (var i = 0; i < 3; i++) {
     var value = (hash >> (i * 8)) & 0xFF;
     color += ('00' + value.toString(16)).substr(-2);
-  }
-  return color;
+}
+return color;
 }
 /**
  * Get white or black based on background color
@@ -537,13 +508,44 @@ function contrastColor(hexcolor){
   return (yiq >= 128) ? 'black' : 'white';
 }
 /**
+ * Filter by Topic
+ */
+const filterIt = (e) => {
+    //get all .current and remove
+    let current = document.querySelectorAll( `.current` );
+    current.forEach((el) => {el.classList.remove('current')});
+    //add .current to this element
+
+    e.target.classList.add('current');
+    let selectedFilter = e.target.dataset.filter;
+    let itemsToShow = document.querySelectorAll( `#posts-container .post` );
+    let itemsToHide = [];
+
+
+    if (selectedFilter != 'all') {
+
+        itemsToHide = document.querySelectorAll( `#posts-container .post:not(.${selectedFilter})` );
+        itemsToShow = document.querySelectorAll( `#posts-container .post.${selectedFilter}` );
+    }else{
+    }
+
+    itemsToHide.forEach((item) => {
+        item.classList.add("hide");
+        item.classList.remove("show");
+    });
+    itemsToShow.forEach((item) => {
+        item.classList.add("show");
+        item.classList.remove("hide");
+    });
+}
+/**
  * Convert break characters to <br>
  */
-const addBreaks = (str) => str.replace(/(?:\r\n|\r|\n)/g, '<br>');
-    
+ const addBreaks = (str) => str.replace(/(?:\r\n|\r|\n)/g, '<br>');
 
-// Create HTML elements according to data from getChildElems and add them to
-// the area where class data will be displayed (the view)
+/**
+ * Create HTML elements according to data from getChildElems and add them to the area where class data will be displayed (the view)
+ */
 const createElems = (childElems, view) => {
     // Clear the view
     view.innerHTML = "";
@@ -600,9 +602,9 @@ const createElems = (childElems, view) => {
  * @see https://github.com/bryanwoods/autolink-js
  * @return {[type]} [description]
  */
-(function() {
+ (function() {
   var autoLink,
-    slice = [].slice;
+  slice = [].slice;
 
   autoLink = function() {
     var callback, k, linkAttributes, option, options, pattern, v;
@@ -610,28 +612,28 @@ const createElems = (childElems, view) => {
     pattern = /(^|[\s\n]|<[A-Za-z]*\/?>)((?:https?|ftp):\/\/[\-A-Z0-9+\u0026\u2019@#\/%?=()~_|!:,.;]*[\-A-Z0-9+\u0026@#\/%=~()_|])/gi;
     if (!(options.length > 0)) {
       return this.replace(pattern, "$1<a href='$2'>$2</a>");
-    }
-    option = options[0];
-    callback = option["callback"];
-    linkAttributes = ((function() {
+  }
+  option = options[0];
+  callback = option["callback"];
+  linkAttributes = ((function() {
       var results;
       results = [];
       for (k in option) {
         v = option[k];
         if (k !== 'callback') {
           results.push(" " + k + "='" + v + "'");
-        }
       }
-      return results;
-    })()).join('');
-    return this.replace(pattern, function(match, space, url) {
+  }
+  return results;
+})()).join('');
+  return this.replace(pattern, function(match, space, url) {
       var link;
       link = (typeof callback === "function" ? callback(url) : void 0) || ("<a href='" + url + "'" + linkAttributes + ">" + url + "</a>");
       return "" + space + link;
-    });
-  };
+  });
+};
 
-  String.prototype['autoLink'] = autoLink;
+String.prototype['autoLink'] = autoLink;
 
 }).call(this);
 

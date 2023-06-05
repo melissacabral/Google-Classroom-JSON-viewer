@@ -6,6 +6,55 @@ Google Classroom JSON Viewer
     --class-color: #2761E6;
     --title-text-color:  white;
 }
+body{
+    margin: 0;
+}
+.start-here{
+    background-color: #eee;
+    transition: all .3s ease-in;
+    text-align: center;
+    min-height: 40vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-bottom: solid 1px #ddd;
+   
+
+}
+.loaded .start-here{
+    min-height: unset;
+    gap: 1em;
+    padding: 1rem;
+    align-items: unset;
+    justify-content: unset;
+    flex-direction: unset;
+    text-align: left;
+}
+.loaded .start-here .container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 95%;
+    max-width: 1600px;
+    padding: 0;
+}
+.loaded .start-here .container h1{
+    font-size: 200%;
+    margin-bottom: 0;
+}
+
+#import-filepicker{
+    background-color: white;
+    line-height: 3.9rem;
+    border: solid 1px #ddd;
+    margin-right: 1rem;
+    cursor: pointer;
+    border-radius: .4rem;
+    padding: 0 1rem;
+}
+
 
 .post{
     border: solid 1px #eee;
@@ -30,7 +79,7 @@ input[type=button]{
 .submissions .submissions-heading{
     flex-grow: 1;
     flex-basis: 100%;
-   
+
 }
 .submission{
     box-sizing: border-box;
@@ -42,7 +91,7 @@ input[type=button]{
 #view{
     max-width: 1600px;
     width: 95%;
-    margin: auto;
+    margin: 2em auto;
     display: grid;
     gap: 1em;
     grid-template-columns: 20% 80%;
@@ -94,7 +143,7 @@ input[type=button]{
     height: 1em;
     border-radius: 100%;
     background-color: var(--class-color);
-   
+
 }
 .hide{
     display: none;
@@ -115,6 +164,6 @@ input[type=button]{
 a{
     border-bottom: dotted 1px var(--class-color);
     color: black;
-   
-  
+
+
 }
